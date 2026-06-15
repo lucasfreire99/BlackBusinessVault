@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Black Business Quotes | Painel de Frases Corporativas</title>
+    <!-- Favicon Empresarial (emoji estilizado + SVG base64 para ícone profissional) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Cpath fill='%23F5B041' d='M30,25 L70,25 L75,40 L25,40 Z'/%3E%3Ccircle cx='50' cy='55' r='18' fill='%23F5B041'/%3E%3Cpath fill='%23222' d='M45,65 L55,65 L52,72 L48,72 Z'/%3E%3Ctext x='50' y='88' font-size='14' text-anchor='middle' fill='%23F5B041' font-family='Arial, sans-serif' font-weight='bold'%3E%26%23x24;%3C/text%3E%3C/svg%3E">
+    <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Cpath fill='%23F5B041' d='M30,25 L70,25 L75,40 L25,40 Z'/%3E%3Ccircle cx='50' cy='55' r='18' fill='%23F5B041'/%3E%3Cpath fill='%23222' d='M45,65 L55,65 L52,72 L48,72 Z'/%3E%3Ctext x='50' y='88' font-size='14' text-anchor='middle' fill='%23F5B041' font-family='Arial, sans-serif' font-weight='bold'%3E%26%23x24;%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+
+        body {
+            background: #0a0a0a;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            color: #ecedee;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        /* background com textura sutil */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#1f1f1f 1px, transparent 1px);
+            background-size: 32px 32px;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* cabeçalho empresarial */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #2c2c2c;
+            padding-bottom: 1rem;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            background: #f5b041;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 800;
+            color: #0a0a0a;
+            box-shadow: 0 4px 12px rgba(245, 176, 65, 0.2);
+        }
+
+        .title-main h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #ffffff 30%, #f5b041 80%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .title-main p {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            margin-top: 4px;
+        }
+
+        .copy-toast {
+            background: #2c2c2c;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #f5b041;
+            border: 1px solid #3a3a3a;
+            backdrop-filter: blur(4px);
+        }
+
+        /* navegação por abas (temas) */
+        .tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.75rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            color: #b0b0b0;
+            font-family: inherit;
+            transition: 0.2s;
+            letter-spacing: -0.2px;
+        }
+
+        .tab-btn i {
+            margin-right: 8px;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            background: #1f1f1f;
+            color: #f5b041;
+        }
+
+        .tab-btn.active {
+            background: #f5b041;
+            color: #0a0a0a;
+            box-shadow: 0 2px 8px rgba(245, 176, 65, 0.3);
+        }
+
+        /* content area */
+        .quotes-panel {
+            background: #0e0e0e;
+            border-radius: 28px;
+            border: 1px solid #2a2a2a;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6);
+            backdrop-filter: blur(2px);
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.3rem;
+        }
+
+        .quote-card {
+            background: #131313;
+            border-radius: 20px;
+            padding: 1.3rem 1.4rem;
+            border-left: 3px solid #f5b041;
+            transition: transform 0.2s, background 0.2s;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quote-card:hover {
+            background: #1c1c1c;
+            transform: translateY(-3px);
+            border-left-width: 4px;
+        }
+
+        .quote-text {
+            font-size: 0.98rem;
+            font-weight: 450;
+            color: #e4e4e4;
+            line-height: 1.45;
+            word-break: break-word;
+            padding-right: 20px;
+        }
+
+        .quote-number {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #f5b041;
+            background: #252525;
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 50px;
+            width: fit-content;
+            letter-spacing: 0.3px;
+        }
+
+        .copy-icon-hint {
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            font-size: 1.1rem;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+            color: #f5b041;
+        }
+
+        .quote-card:hover .copy-icon-hint {
+            opacity: 1;
+        }
+
+        /* toast notificação */
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            background: #1f1f1f;
+            backdrop-filter: blur(12px);
+            border: 1px solid #f5b041;
+            color: #f5b041;
+            padding: 12px 26px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.2s;
+            white-space: nowrap;
+            font-family: monospace;
+            letter-spacing: 0.3px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .toast-msg.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) scale(1);
+        }
+
+        /* footer */
+        .footer-note {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #5a5a5a;
+            border-top: 1px solid #222;
+            padding-top: 1.5rem;
+        }
+
+        /* responsive */
+        @media (max-width: 720px) {
+            body {
+                padding: 1rem;
+            }
+            .quotes-grid {
+                grid-template-columns: 1fr;
+            }
+            .tab-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            .title-main h1 {
+                font-size: 1.3rem;
+            }
+            .quotes-panel {
+                padding: 1.2rem;
+            }
+        }
+
+        ::selection {
+            background: #f5b041;
+            color: #000;
+        }
+
+        /* scrollbar elegante */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f5b041;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="top-bar">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <span>BQ</span>
+            </div>
+            <div class="title-main">
+                <h1>Black Business Vault</h1>
+                <p>Frases corporativas premium • Copie com um clique</p>
+            </div>
+        </div>
+        <div class="copy-toast">
+            📋 clique em qualquer frase → copiar
+        </div>
+    </div>
+
+    <!-- abas por temas -->
+    <div class="tabs-nav" id="tabsContainer">
+        <button class="tab-btn active" data-tab="rh">🏢 RH & Pessoas</button>
+        <button class="tab-btn" data-tab="adm">📊 Administração</button>
+        <button class="tab-btn" data-tab="dp">⚙️ Departamento Pessoal</button>
+        <button class="tab-btn" data-tab="linkedin">🔗 LinkedIn & Marca</button>
+        <button class="tab-btn" data-tab="lideranca">🚀 Liderança & Alta Performance</button>
+    </div>
+
+    <div class="quotes-panel">
+        <div id="quotesContainer" class="quotes-grid">
+            <!-- As frases serão injetadas via JS -->
+        </div>
+    </div>
+    <div class="footer-note">
+        ✦ 100 frases corporativas premium | separadas por temas estratégicos ✦
+    </div>
+</div>
+
+<div id="toastMsg" class="toast-msg">✓ Frase copiada para a área de transferência</div>
+
+<script>
+    // --------------------------------------------------------------
+    // BASE DE DADOS DAS 100 FRASES (conforme fornecido e organizado)
+    // --------------------------------------------------------------
+    const quotesDatabase = {
+        rh: [
+            "Pessoas são o principal diferencial competitivo de qualquer organização.",
+            "Desenvolver talentos é investir no crescimento sustentável da empresa.",
+            "O sucesso empresarial começa com a valorização das pessoas.",
+            "Recrutar é encontrar talentos; desenvolver é construir futuros líderes.",
+            "Uma cultura organizacional forte impulsiona resultados extraordinários.",
+            "O RH estratégico conecta pessoas, processos e resultados.",
+            "Equipes engajadas transformam metas em conquistas.",
+            "A gestão de pessoas é a ponte entre o potencial e a performance.",
+            "Grandes empresas são construídas por profissionais comprometidos.",
+            "O desenvolvimento humano é a base da inovação organizacional.",
+            "Contratar competências é importante; desenvolver talentos é essencial.",
+            "O capital humano é o ativo mais valioso de uma organização.",
+            "O crescimento profissional nasce da aprendizagem contínua.",
+            "Um ambiente saudável favorece produtividade e inovação.",
+            "Valorizar pessoas é fortalecer o futuro da empresa.",
+            "Liderança eficaz inspira crescimento e excelência.",
+            "Pessoas motivadas entregam resultados consistentes.",
+            "O RH moderno atua como parceiro estratégico do negócio.",
+            "O desempenho organizacional reflete a qualidade de sua equipe.",
+            "Investir em pessoas é investir no sucesso corporativo."
+        ],
+        adm: [
+            "A excelência administrativa transforma desafios em oportunidades.",
+            "Uma gestão eficiente é a base para resultados sustentáveis.",
+            "Planejamento e organização são pilares do sucesso empresarial.",
+            "Administrar é alinhar recursos para alcançar objetivos.",
+            "A eficiência operacional começa com processos bem estruturados.",
+            "Decisões estratégicas geram vantagens competitivas.",
+            "A boa gestão cria valor para toda a organização.",
+            "Organizações de sucesso são construídas sobre planejamento sólido.",
+            "A administração eficaz impulsiona produtividade e crescimento.",
+            "Processos organizados geram resultados consistentes.",
+            "O gestor eficiente transforma informações em decisões.",
+            "A excelência administrativa reduz custos e amplia oportunidades.",
+            "A organização é o primeiro passo para a alta performance.",
+            "Resultados sustentáveis exigem gestão inteligente.",
+            "A disciplina nos processos fortalece a competitividade.",
+            "O sucesso empresarial depende de uma gestão estratégica.",
+            "Administrar é antecipar desafios e criar soluções.",
+            "A melhoria contínua é uma vantagem competitiva permanente.",
+            "A eficiência é resultado de planejamento e execução alinhados.",
+            "Gestão de qualidade é compromisso com a excelência."
+        ],
+        dp: [
+            "O Departamento Pessoal é essencial para a segurança e conformidade das organizações.",
+            "A precisão nos processos trabalhistas fortalece a gestão empresarial.",
+            "A excelência no DP garante confiança e credibilidade.",
+            "Gestão trabalhista eficiente é sinônimo de organização.",
+            "O cumprimento das obrigações legais protege empresas e colaboradores.",
+            "Cada detalhe no DP faz diferença nos resultados corporativos.",
+            "Organização e atenção são marcas de um DP de excelência.",
+            "A conformidade trabalhista é um investimento, não um custo.",
+            "Processos bem executados geram segurança para todos.",
+            "O DP é um importante aliado da gestão de pessoas.",
+            "Profissionalismo e responsabilidade são fundamentais na área trabalhista.",
+            "A gestão eficiente da folha de pagamento fortalece a confiança organizacional.",
+            "O DP contribui diretamente para a estabilidade empresarial.",
+            "A legislação trabalhista exige atualização constante.",
+            "Um DP estratégico apoia o crescimento da organização.",
+            "A qualidade nos processos trabalhistas reduz riscos e aumenta eficiência.",
+            "O controle eficaz gera segurança operacional.",
+            "O Departamento Pessoal é a base da administração de vínculos trabalhistas.",
+            "Excelência operacional começa com processos bem executados.",
+            "Organização e conformidade caminham lado a lado."
+        ],
+        linkedin: [
+            "O aprendizado contínuo é o combustível do crescimento profissional.",
+            "Cada desafio é uma oportunidade para desenvolver novas competências.",
+            "O sucesso profissional é resultado de dedicação e consistência.",
+            "Construir uma carreira sólida exige conhecimento e disciplina.",
+            "Grandes oportunidades surgem para quem está preparado.",
+            "Crescimento profissional é consequência de evolução constante.",
+            "O conhecimento adquirido hoje será o diferencial de amanhã.",
+            "A excelência é construída diariamente por meio de pequenas ações.",
+            "Profissionais de destaque nunca param de aprender.",
+            "A evolução profissional começa com a busca por conhecimento.",
+            "O desenvolvimento de competências amplia horizontes e oportunidades.",
+            "Resultados extraordinários exigem comprometimento contínuo.",
+            "A carreira é construída por escolhas estratégicas.",
+            "O profissional que se adapta às mudanças permanece relevante.",
+            "Networking e conhecimento formam uma combinação poderosa.",
+            "Cada experiência agrega valor à trajetória profissional.",
+            "O futuro pertence aos profissionais que investem em capacitação.",
+            "Crescer profissionalmente é um processo de aprendizado permanente.",
+            "O diferencial está na capacidade de gerar valor.",
+            "A busca pela excelência é uma jornada sem linha de chegada."
+        ],
+        lideranca: [
+            "Líderes inspiram pessoas a alcançarem seu melhor potencial.",
+            "A liderança eficaz é baseada em exemplo e confiança.",
+            "Grandes resultados são fruto de equipes alinhadas e comprometidas.",
+            "A comunicação clara fortalece a cultura organizacional.",
+            "O trabalho em equipe potencializa talentos individuais.",
+            "Liderar é desenvolver pessoas para alcançar objetivos comuns.",
+            "O comprometimento coletivo gera resultados excepcionais.",
+            "A inovação nasce em ambientes que valorizam ideias.",
+            "A confiança é o alicerce das relações profissionais.",
+            "O desempenho sustentável depende de liderança consciente.",
+            "Equipes fortes constroem organizações fortes.",
+            "O sucesso é resultado da soma de esforços consistentes.",
+            "A alta performance exige foco, disciplina e execução.",
+            "A colaboração é um dos maiores impulsionadores de resultados.",
+            "Organizações vencedoras investem em pessoas e conhecimento.",
+            "O protagonismo profissional transforma carreiras.",
+            "A excelência operacional é construída diariamente.",
+            "Resultados duradouros exigem visão estratégica.",
+            "O verdadeiro crescimento acontece fora da zona de conforto.",
+            "Profissionalismo, ética e comprometimento são pilares de uma carreira de sucesso."
+        ]
+    };
+
+    // Verificação de consistência: cada tema deve ter 20 frases (total 100)
+    // Fornecido pelo escopo: RH 20, Adm 20, DP 20, LinkedIn 20, Liderança 20 -> OK
+
+    // Função para renderizar as frases do tema ativo
+    let currentTab = 'rh';  // padrão
+
+    function renderQuotes(tabId) {
+        const container = document.getElementById('quotesContainer');
+        if (!container) return;
+        
+        const quotesArray = quotesDatabase[tabId];
+        if (!quotesArray) return;
+        
+        // Gerar cards com numeração incremental (1 a 20 por tema)
+        // mas para experiência global indicamos numeração temática + número original sequencial
+        let html = '';
+        quotesArray.forEach((quote, idx) => {
+            const globalNumber = getGlobalNumberByTabAndIndex(tabId, idx);
+            html += `
+                <div class="quote-card" data-quote="${escapeHtml(quote)}">
+                    <div class="quote-number">#${globalNumber}</div>
+                    <div class="quote-text">“${escapeHtml(quote)}”</div>
+                    <div class="copy-icon-hint">📋 copiar</div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+        
+        // Adicionar evento de clique em cada card (copiar texto)
+        attachCopyEvents();
+    }
+    
+    // Mapear número global das frases conforme a ordem original do enunciado:
+    // RH: 1-20, Adm:21-40, DP:41-60, LinkedIn:61-80, Liderança:81-100
+    function getGlobalNumberByTabAndIndex(tab, idx) {
+        const mapStart = {
+            rh: 1,
+            adm: 21,
+            dp: 41,
+            linkedin: 61,
+            lideranca: 81
+        };
+        const start = mapStart[tab] || 1;
+        return start + idx;
+    }
+    
+    // simples escape para prevenir XSS
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+    
+    // função para copiar texto com feedback toast
+    function attachCopyEvents() {
+        const cards = document.querySelectorAll('.quote-card');
+        cards.forEach(card => {
+            // Remove listener antigo para evitar duplicidade ao re-renderizar
+            card.removeEventListener('click', copyHandler);
+            card.addEventListener('click', copyHandler);
+        });
+    }
+    
+    function copyHandler(event) {
+        // Previne qualquer burble
+        event.stopPropagation();
+        // O texto está armazenado em data-quote
+        const quoteText = this.getAttribute('data-quote');
+        if (quoteText) {
+            navigator.clipboard.writeText(quoteText).then(() => {
+                showToast(`✓ Copiado: "${quoteText.substring(0, 70)}${quoteText.length > 70 ? '…' : ''}"`);
+                // feedback visual rápido no card
+                const originalBorder = this.style.borderLeftColor;
+                this.style.borderLeftColor = '#ffffff';
+                setTimeout(() => {
+                    this.style.borderLeftColor = originalBorder || '#f5b041';
+                }, 200);
+            }).catch(() => {
+                fallbackCopy(quoteText);
+            });
+        } else {
+            // fallback pelo texto interno (caso falhe o atributo)
+            const textElem = this.querySelector('.quote-text');
+            let rawText = textElem ? textElem.innerText.replace(/[“”]/g, '').trim() : '';
+            if (rawText) {
+                navigator.clipboard.writeText(rawText).then(() => showToast(`✓ Copiado: ${rawText.substring(0, 60)}`));
+            }
+        }
+    }
+    
+    function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast('✓ Frase copiada (fallback)');
+    }
+    
+    let toastTimeout;
+    function showToast(message) {
+        const toast = document.getElementById('toastMsg');
+        if (!toast) return;
+        // personalizar mensagem rápida, mas manter padrão
+        toast.textContent = message.length > 80 ? message.substring(0, 77) + '...' : message;
+        toast.classList.add('show');
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                if (toast) toast.textContent = '✓ Frase copiada para a área de transferência';
+            }, 300);
+        }, 1800);
+    }
+    
+    // Configurar abas com evento e classe ativa
+    function initTabs() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const tabId = btn.getAttribute('data-tab');
+                if (!tabId) return;
+                // atualizar classe ativa
+                tabs.forEach(t => t.classList.remove('active'));
+                btn.classList.add('active');
+                currentTab = tabId;
+                renderQuotes(currentTab);
+                // rolagem suave para o conteúdo
+                document.querySelector('.quotes-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    }
+    
+    // Ao iniciar, carregar a primeira aba (RH)
+    renderQuotes('rh');
+    initTabs();
+    
+    // Adicionar atalho de teclado opcional (Ctrl+C já é nativo, mas manter experiência)
+    // Acessibilidade extra
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'c') {
+            // pequeno helper não conflita com seleção, apenas para lembrete
+        }
+    });
+    
+    // Verifica se algum card com clique falhou em caso de render dinâmico, já está coberto
+    // Também guardar dados persistentes
+    console.log('Black Business Quotes - 100 frases corporativas prontas para copiar');
+</script>
+</body>
+</html>
