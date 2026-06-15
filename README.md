@@ -2,7 +2,7 @@
 
 ### 100 Frases Corporativas Premium – Copie com um clique
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
@@ -30,10 +30,10 @@
 ## 🚀 Como usar
 
 ### Online (GitHub Pages)
-Acesse: `https://seu-usuario.github.io/BlackBusinessVault/`
+Acesse: [BlackBusinessVault](https://lucasfreire99.github.io/BlackBusinessVault/)
 
 ### Localmente
 ```bash
-git clone https://github.com/seu-usuario/BlackBusinessVault.git
+git clone https://github.com/lucasfreire99/BlackBusinessVault.git
 cd BlackBusinessVault
 # Abra o arquivo index.html no seu navegador
